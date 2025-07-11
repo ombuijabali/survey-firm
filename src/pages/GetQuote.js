@@ -20,11 +20,20 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 const services = [
-  'Land Survey',
-  'Mapping',
+  'Land Surveying',
+  'Sub-divisions Mutations',
+  'Beaconing/Boundary Delimitation',
+  'Cadastral Mapping',
+  'Topographical Mapping',
+  'Title Deed Processing',
+  'Lidar & Aerial Mapping',
+  'Succession of Land Process',
+  'Land Searches',
+  'Boundaries Determination',
+  'Land Transfers & Sub-divisions',
+  'Georeferencing & Navigations',
+  'RTK (Real Time Kinematics Surveys)',
   'Cartography',
-  'Web Development',
-  'Drone Mapping',
 ];
 
 const QuoteSchema = Yup.object().shape({
@@ -209,7 +218,7 @@ const GetQuote = () => {
                           margin="normal"
                           multiline
                           rows={4}
-                          placeholder="Please describe your project requirements, timeline, and any specific needs..."
+                          placeholder="Describe your project, site location, goals, timeline, and any special requirements for your selected service(s)..."
                           error={touched.description && Boolean(errors.description)}
                           helperText={touched.description && errors.description}
                           sx={{

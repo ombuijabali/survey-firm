@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Map as MapIcon,
   SatelliteAlt as SatelliteAltIcon,
@@ -79,7 +80,7 @@ const Home = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: 'url(/images/hero2.jpg)',
+            backgroundImage: 'url(/images/hero3.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             zIndex: -2,
@@ -112,11 +113,11 @@ const Home = () => {
             variant="h4"
             sx={{
               mb: 4,
-              fontWeight: 300,
+              fontWeight: 500,
               textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
             }}
           >
-            Empowering decisions with accurate spatial data
+            ~Clear steps~
           </Typography>
           <Button
             variant="contained"
@@ -177,14 +178,14 @@ const Home = () => {
                     {service.description}
                   </Typography>
                 </CardContent>
-                <Button href="/services" color="primary" sx={{ mt: 3, fontWeight: 500, textTransform: 'none', fontSize: '1rem' }}>
-                  Learn More
-                </Button>
+                            <Button component={RouterLink} to="/services" color="primary" sx={{ mt: 3, fontWeight: 500, textTransform: 'none', fontSize: '1rem' }}>
+                Learn More
+            </Button>
               </Card>
           ))}
         </Box>
         <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <Button variant="contained" color="secondary" href="/services" size="large">
+            <Button variant="contained" color="secondary" component={RouterLink} to="/services" size="large">
                 Explore All Services
             </Button>
         </Box>
@@ -205,7 +206,7 @@ const Home = () => {
             <Box>
               <Box
                 component="img"
-                src="/images/hero3.jpg"
+                src="/images/flight.jpg"
                 alt="About us"
                 sx={{
                   width: '100%',
@@ -226,7 +227,8 @@ const Home = () => {
                 variant="outlined"
                 color="inherit"
                 size="large"
-                href="/about"
+                component={RouterLink}
+                to="/about"
                 sx={{ px: 4, py: 1.5 }}
               >
                 Read More
@@ -295,7 +297,8 @@ const Home = () => {
               variant="contained"
               color="secondary"
               size="large"
-              href="/get-quote"
+              component={RouterLink}
+              to="/get-quote"
               sx={{
                 px: 6,
                 py: 2,
@@ -310,7 +313,8 @@ const Home = () => {
               variant="outlined"
               color="inherit"
               size="large"
-              href="/contact"
+              component={RouterLink}
+              to="/contact"
               sx={{
                 px: 6,
                 py: 2,

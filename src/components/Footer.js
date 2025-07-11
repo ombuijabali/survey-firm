@@ -7,6 +7,7 @@ import {
   Link,
   IconButton,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -38,9 +39,7 @@ const Footer = () => {
   ];
 
   const partnerLogos = [
-      { src: '/images/meru.png', alt: 'Meru Logo' },
-      { src: '/images/nema.png', alt: 'Nema Logo' },
-      { src: '/images/ngo.jpeg', alt: 'Ngo Logo' },
+      { src: '/images/high.jpg', alt: 'Highlands Logo' },
   ]
 
   return (
@@ -88,7 +87,7 @@ const Footer = () => {
               Company
             </Typography>
             {companyLinks.map(link => (
-              <Link key={link.name} href={link.path} color="inherit" display="block" sx={{ mb: 1, textDecoration: 'none', '&:hover': { color: 'secondary.main' } }}>{link.name}</Link>
+              <Link key={link.name} component={RouterLink} to={link.path} color="inherit" display="block" sx={{ mb: 1, textDecoration: 'none', '&:hover': { color: 'secondary.main' } }}>{link.name}</Link>
             ))}
           </Grid>
           

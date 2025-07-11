@@ -18,7 +18,7 @@ import {
   Link,
   ListItemIcon,
   Collapse,
-  MenuItem
+  
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -28,19 +28,30 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import {
-  Map as MapIcon,
-  LocationOn as LocationIcon,
-  Flight as DroneIcon,
-  Web as WebIcon,
-  Assessment as AssessmentIcon,
-} from '@mui/icons-material';
+import MapIcon from '@mui/icons-material/Map';
+import LocationIcon from '@mui/icons-material/LocationOn';
+import DroneIcon from '@mui/icons-material/Flight';
+import WebIcon from '@mui/icons-material/Web';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import GpsFixedIcon from '@mui/icons-material/GpsFixed';
+import Search from '@mui/icons-material/Search';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import ExploreIcon from '@mui/icons-material/Explore';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import AssignmentInd from '@mui/icons-material/AssignmentInd';
 import { Link as RouterLink } from 'react-router-dom';
 
 const services = [
+  { name: 'Succession of Land Process', icon: <AssignmentInd />, description: 'Guidance through land succession legalities.', path: '/services/succession-of-land' },
+  { name: 'Land Searches', icon: <Search />, description: 'Comprehensive land search and verification.', path: '/services/land-searches' },
+  { name: 'Boundaries Determination', icon: <MapIcon />, description: 'Accurate property boundary determination.', path: '/services/boundaries-determination' },
+  { name: 'Land Transfers & Sub-divisions', icon: <SwapHorizIcon />, description: 'Land transfer and sub-division services.', path: '/services/land-transfers-subdivisions' },
+  { name: 'Georeferencing & Navigations', icon: <ExploreIcon />, description: 'Georeferencing and navigation solutions.', path: '/services/georeferencing-navigations' },
+  { name: 'RTK (Real Time Kinematics Surveys)', icon: <GpsFixedIcon />, description: 'High-precision RTK survey services.', path: '/services/rtk-surveys' },
+  { name: 'Cartography', icon: <TimelineIcon />, description: 'Professional map design and cartography.', path: '/services/cartography' },
   { name: 'Land Surveying', icon: <LocationIcon />, description: 'Accurate land and boundary surveys.', path: '/services/land-surveying' },
   { name: 'Sub-divisions Mutations', icon: <AssessmentIcon />, description: 'Land sub-division and mutation services.', path: '/services/subdivisions-mutations' },
-  { name: 'Beaconing/Boundary Delimitation', icon: <MapIcon />, description: 'Precise beaconing and boundary marking.', path: '/services/beaconing-boundary-delimitation' },
+  { name: 'Beaconing Delimitation', icon: <MapIcon />, description: 'Precise beaconing and boundary marking.', path: '/services/beaconing-boundary-delimitation' },
   { name: 'Cadastral Mapping', icon: <MapIcon />, description: 'Cadastral mapping for property and legal needs.', path: '/services/cadastral-mapping' },
   { name: 'Topographical Mapping', icon: <MapIcon />, description: 'Detailed topographical mapping services.', path: '/services/topographical-mapping' },
   { name: 'Title Deed Processing', icon: <WebIcon />, description: 'Title deed processing and documentation.', path: '/services/title-deed-processing' },
@@ -87,8 +98,9 @@ const Navbar = () => {
   };
 
   // Group services for dropdown
-  const leftColumn = services.slice(0, 4);
-  const rightColumn = services.slice(4, 7);
+  //const midpoint = Math.ceil(services.length / 2);
+  //const leftColumn = services.slice(0, midpoint);
+  //const rightColumn = services.slice(midpoint);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -203,52 +215,47 @@ const Navbar = () => {
                             top: '100%',
                             left: '50%',
                             transform: 'translateX(-50%)',
-                            width: '800px',
+                            width: '1100px',
                             p: 4,
                             mt: 1,
                             visibility: servicesMenuOpen ? 'visible' : 'hidden',
                             opacity: servicesMenuOpen ? 1 : 0,
                             transition: 'opacity 0.3s ease, visibility 0.3s ease',
                             borderTop: `3px solid ${theme.palette.primary.main}`,
-                            boxShadow: theme.shadows[5]
+                            boxShadow: theme.shadows[5],
+                            backgroundColor: 'white',
+                            borderRadius: 3,
                           }}
                         >
-                          <Typography variant="h6" gutterBottom>Our Services</Typography>
-                          <Grid container spacing={2}>
-                            <Grid item xs={6}>
-                              {leftColumn.map((service) => (
-                                <Link key={service.name} component={RouterLink} to={service.path} sx={{textDecoration: 'none'}}>
-                                  <Box sx={{display: 'flex', alignItems: 'center', p:1, '&:hover': {backgroundColor: 'action.hover', borderRadius: 1}}}>
-                                    <ListItemIcon sx={{color: 'primary.main', minWidth: 40}}>{service.icon}</ListItemIcon>
-                                    <Box>
-                                      <Typography variant="subtitle1" sx={{fontWeight: 600, color: 'text.primary'}}>{service.name}</Typography>
-                                      <Typography variant="body2" color="text.secondary">{service.description}</Typography>
-                                    </Box>
+                          <Grid container spacing={4}>
+                            {services.map((service, idx) => (
+                              <Grid item xs={12} sm={4} md={4} key={service.name}>
+                                <Link component={RouterLink} to={service.path} sx={{textDecoration: 'none'}}>
+                                  <Box sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    p: 1.2,
+                                    borderRadius: 2,
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 0,
+                                    transition: 'background 0.2s',
+                                    '&:hover': {
+                                      backgroundColor: 'grey.100',
+                                    },
+                                    minHeight: 90,
+                                    height: '100%',
+                                    maxWidth: 180,
+                                    mx: 'auto',
+                                  }}>
+                                    <ListItemIcon sx={{color: 'primary.main', minWidth: 0, mb: 0.5, fontSize: 28, '& svg': { fontSize: 28 }}}>{service.icon}</ListItemIcon>
+                                    <Typography variant="subtitle2" sx={{fontWeight: 600, color: 'text.primary', textAlign: 'center', mb: 0.2, fontSize: 15}}>{service.name}</Typography>
+                                    <Typography variant="body2" color="text.secondary" sx={{textAlign: 'center', fontSize: 13}}>{service.description}</Typography>
                                   </Box>
                                 </Link>
-                              ))}
-                            </Grid>
-                            <Grid item xs={6} sx={{display: 'flex', flexDirection: 'column'}}>
-                              {rightColumn.map((service) => (
-                                <Link key={service.name} component={RouterLink} to={service.path} sx={{textDecoration: 'none'}}>
-                                  <Box sx={{display: 'flex', alignItems: 'center', p:1, '&:hover': {backgroundColor: 'action.hover', borderRadius: 1}}}>
-                                    <ListItemIcon sx={{color: 'primary.main', minWidth: 40}}>{service.icon}</ListItemIcon>
-                                    <Box>
-                                      <Typography variant="subtitle1" sx={{fontWeight: 600, color: 'text.primary'}}>{service.name}</Typography>
-                                      <Typography variant="body2" color="text.secondary">{service.description}</Typography>
-                                    </Box>
-                                  </Box>
-                                </Link>
-                              ))}
-                            </Grid>
-                            {/* CTA full width below, centered */}
-                            <Grid item xs={12} sx={{mt: 3, display: 'flex', justifyContent: 'center'}}>
-                              <Box sx={{backgroundColor: 'primary.main', color: 'white', p: 3, borderRadius: 2, minWidth: 320, maxWidth: 400, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                                <Typography variant="h6" sx={{fontWeight: 600, textAlign: 'center'}}>Not sure what you need?</Typography>
-                                <Typography variant="body2" sx={{my: 2, textAlign: 'center'}}>Let our experts guide you to the right solution.</Typography>
-                                <Button component={RouterLink} to="/contact" variant="contained" sx={{backgroundColor: 'white', color: 'primary.main', '&:hover': {backgroundColor: 'grey.200'}}}>Contact Us</Button>
-                              </Box>
-                            </Grid>
+                              </Grid>
+                            ))}
                           </Grid>
                         </Paper>
                       )}

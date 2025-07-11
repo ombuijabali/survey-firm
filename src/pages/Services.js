@@ -2,15 +2,11 @@ import React from 'react';
 import {
   Container,
   Typography,
-  Grid,
   Card,
-  CardContent,
   Box,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  Button,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Map as MapIcon,
   LocationOn as LocationIcon,
@@ -26,7 +22,7 @@ const Services = () => {
       id: 'land-surveying',
       title: 'Land Surveying',
       icon: <LocationIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
-      description: 'Accurate land and boundary surveys for all property types.',
+      description: 'Comprehensive land and boundary surveys for all property types.',
       features: [
         'Boundary surveys',
         'Topographic surveys',
@@ -120,6 +116,104 @@ const Services = () => {
       ],
       longDescription: 'Our lidar and aerial mapping services use drones and advanced sensors to deliver high-resolution data for surveying, construction, and environmental monitoring.',
     },
+    {
+      id: 'succession-of-land',
+      title: 'Succession of Land Process',
+      icon: <AssessmentIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'Guidance through the legal and administrative process of land succession.',
+      features: [
+        'Succession planning',
+        'Legal documentation',
+        'Liaison with authorities',
+        'Technical surveys',
+        'Title transfer',
+      ],
+      longDescription: 'We guide you through the succession of land process, ensuring all legal, administrative, and technical requirements are met for a smooth transfer of ownership.',
+    },
+    {
+      id: 'land-searches',
+      title: 'Land Searches',
+      icon: <AssessmentIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'Comprehensive land search and verification services.',
+      features: [
+        'Registry searches',
+        'Title verification',
+        'Encumbrance checks',
+        'Due diligence',
+        'Ownership confirmation',
+      ],
+      longDescription: 'We conduct thorough land searches to verify property ownership, check for encumbrances, and ensure compliance with legal requirements.',
+    },
+    {
+      id: 'boundaries-determination',
+      title: 'Boundaries Determination',
+      icon: <MapIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'Accurate determination and demarcation of property boundaries.',
+      features: [
+        'Boundary surveys',
+        'Beacon placement',
+        'Legal documentation',
+        'Dispute resolution',
+        'Survey reports',
+      ],
+      longDescription: 'We offer expert boundary determination services to resolve disputes, clarify property lines, and ensure legal compliance.',
+    },
+    {
+      id: 'land-transfers-subdivisions',
+      title: 'Land Transfers & Sub-divisions',
+      icon: <AssessmentIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'Professional handling of land transfer and sub-division processes.',
+      features: [
+        'Transfer documentation',
+        'Subdivision planning',
+        'Survey plan preparation',
+        'Liaison with authorities',
+        'Title updates',
+      ],
+      longDescription: 'We manage the entire process of land transfers and sub-divisions, from initial application to final registration, ensuring compliance with all legal and technical requirements.',
+    },
+    {
+      id: 'georeferencing-navigations',
+      title: 'Georeferencing & Navigations',
+      icon: <MapIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'Georeferencing and navigation solutions for mapping and planning.',
+      features: [
+        'GNSS data collection',
+        'Map georeferencing',
+        'Navigation planning',
+        'GIS integration',
+        'Field support',
+      ],
+      longDescription: 'We provide georeferencing and navigation services using the latest GNSS and GIS technologies for mapping, surveying, and asset management.',
+    },
+    {
+      id: 'rtk-surveys',
+      title: 'RTK (Real Time Kinematics Surveys)',
+      icon: <AssessmentIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'High-precision RTK surveys for engineering and mapping.',
+      features: [
+        'RTK setup',
+        'Field data collection',
+        'High-precision mapping',
+        'Reporting',
+        'Construction support',
+      ],
+      longDescription: 'We offer Real Time Kinematics (RTK) surveys for centimeter-level accuracy in positioning and mapping, ideal for construction, engineering, and land development projects.',
+    },
+    {
+      id: 'cartography',
+      title: 'Cartography',
+      icon: <MapIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      description: 'Professional map design and cartographic services.',
+      features: [
+        'Custom map design',
+        'Thematic mapping',
+        'Cartographic consulting',
+        'GIS data visualization',
+        'Educational maps',
+      ],
+      longDescription: 'We create visually compelling and accurate maps for a variety of applications, including urban planning, environmental management, and education.',
+    },
   ];
 
   return (
@@ -194,27 +288,17 @@ const Services = () => {
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
           Contact us today to discuss your project requirements and get a customized quote
         </Typography>
-        <Box>
-          <Typography
-            variant="h6"
-            component="a"
-            href="/get-quote"
-            sx={{
-              display: 'inline-block',
-              px: 4,
-              py: 2,
-              backgroundColor: 'primary.main',
-              color: 'white',
-              textDecoration: 'none',
-              borderRadius: 2,
-              fontWeight: 500,
-              '&:hover': {
-                backgroundColor: 'primary.dark',
-              },
-            }}
+        <Box sx={{ textAlign: 'center', mt: 6 }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            component={RouterLink}
+            to="/get-quote"
+            sx={{ px: 6, py: 2, fontSize: '1.2rem' }}
           >
             Get a Quote
-          </Typography>
+          </Button>
         </Box>
       </Box>
     </Container>

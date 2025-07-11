@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from './components/Navbar';
@@ -17,6 +17,13 @@ import CadastralMapping from './pages/services/CadastralMapping';
 import TopographicalMapping from './pages/services/TopographicalMapping';
 import TitleDeedProcessing from './pages/services/TitleDeedProcessing';
 import LidarAerialMapping from './pages/services/LidarAerialMapping';
+import SuccessionOfLand from './pages/services/SuccessionOfLand';
+import LandSearches from './pages/services/LandSearches';
+import BoundariesDetermination from './pages/services/BoundariesDetermination';
+import LandTransfersSubdivisions from './pages/services/LandTransfersSubdivisions';
+import GeoreferencingNavigations from './pages/services/GeoreferencingNavigations';
+import RTKSurveys from './pages/services/RTKSurveys';
+import Cartography from './pages/services/Cartography';
 
 // Create a custom theme with survey industry colors
 const theme = createTheme({
@@ -103,12 +110,29 @@ const theme = createTheme({
   },
 });
 
+// Custom hook to scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Scroll to top with smooth behavior
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
         <div className="App">
+          <ScrollToTop />
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -120,6 +144,13 @@ function App() {
             <Route path="/services/topographical-mapping" element={<TopographicalMapping />} />
             <Route path="/services/title-deed-processing" element={<TitleDeedProcessing />} />
             <Route path="/services/lidar-aerial-mapping" element={<LidarAerialMapping />} />
+            <Route path="/services/succession-of-land" element={<SuccessionOfLand />} />
+            <Route path="/services/land-searches" element={<LandSearches />} />
+            <Route path="/services/boundaries-determination" element={<BoundariesDetermination />} />
+            <Route path="/services/land-transfers-subdivisions" element={<LandTransfersSubdivisions />} />
+            <Route path="/services/georeferencing-navigations" element={<GeoreferencingNavigations />} />
+            <Route path="/services/rtk-surveys" element={<RTKSurveys />} />
+            <Route path="/services/cartography" element={<Cartography />} />
             <Route path="/about" element={<About />} />
             <Route path="/our-work" element={<OurWork />} />
             <Route path="/contact" element={<Contact />} />

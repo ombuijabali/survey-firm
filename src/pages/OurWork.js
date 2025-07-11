@@ -8,38 +8,29 @@ import {
   CardMedia,
   Box,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 const projects = [
   {
-    title: 'Coastal Mapping Initiative',
-    image: '/images/hero3.jpg',
-    description: 'High-resolution mapping of coastal areas for environmental monitoring.'
-  },
-  {
-    title: 'Drone Mapping for Construction',
-    image: '/images/hero2.jpg',
-    description: 'Aerial drone mapping to monitor construction progress and site planning.'
-  },
-  {
-    title: 'Cadastral Survey',
-    image: '/images/hero3.jpg',
+    title: 'Subdivision Survey',
+    image: '/images/work.jpg',
     description: 'Boundary & property surveys for legal documentation and land registration.'
   },
   {
     title: 'Topographic Mapping',
-    image: '/images/hero3.jpg',
-    description: 'Detailed topographic mapping for infrastructure planning and design.'
+    image: '/images/wk.jpg',
+    description: 'Detailed topographic mapping for farming planning and design.'
   },
 ];
 
 const OurWork = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Box sx={{ textAlign: 'center', mb: 8 }}>
+      <Box sx={{ textAlign: 'center', mb: 8, backgroundColor: 'primary.main', color: 'white' }}>
         <Typography variant="h1" sx={{ mb: 3, fontWeight: 700 }}>
           Our Work
         </Typography>
-        <Typography variant="h5" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto' }}>
+        <Typography variant="h5" color="white" sx={{ maxWidth: 800, mx: 'auto' }}>
           Explore some of our recent projects and see the quality of our surveying and mapping solutions
         </Typography>
       </Box>
@@ -76,8 +67,8 @@ const OurWork = () => {
         <Box>
           <Typography
             variant="h6"
-            component="a"
-            href="/contact"
+            component={RouterLink}
+            to="/contact"
             sx={{
               display: 'inline-block',
               px: 4,

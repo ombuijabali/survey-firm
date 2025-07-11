@@ -11,6 +11,7 @@ import {
   ListItemText,
   Button,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   CheckCircle as CheckIcon,
   Person as PersonIcon,
@@ -125,7 +126,7 @@ const About = () => {
           }}>
             Leading the way in professional surveying and mapping solutions
           </Typography>
-          <Button variant="contained" color="secondary" href="/contact">Contact Us</Button>
+          <Button variant="contained" color="secondary" component={RouterLink} to="/contact">Contact Us</Button>
         </Container>
       </Box>
 
@@ -375,7 +376,8 @@ const About = () => {
                   backgroundColor: 'grey.100'
                 }
               }}
-              href="/contact"
+              component={RouterLink}
+              to="/contact"
             >
               Contact Us
             </Button>
@@ -391,7 +393,8 @@ const About = () => {
                   borderColor: 'white'
                 }
               }}
-              href="/get-quote"
+              component={RouterLink}
+              to="/get-quote"
             >
               Get a Quote
             </Button>
