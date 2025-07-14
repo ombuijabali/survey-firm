@@ -131,7 +131,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <div className="App">
+    <div className="App">
           <ScrollToTop />
           <Navbar />
           <Routes>
@@ -157,7 +157,7 @@ function App() {
             <Route path="/get-quote" element={<GetQuote />} />
           </Routes>
           <Footer />
-        </div>
+    </div>
       </Router>
     </ThemeProvider>
   );

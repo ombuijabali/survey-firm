@@ -18,6 +18,7 @@ import {
 } from '@mui/icons-material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import emailjs from '@emailjs/browser';
 
 const services = [
   'Land Surveying',
@@ -43,10 +44,38 @@ const QuoteSchema = Yup.object().shape({
   company: Yup.string().required('Company name is required'),
   service: Yup.string().required('Please select a service'),
   description: Yup.string().required('Project description is required'),
+  document_link: Yup.string().url('Must be a valid URL').required('Document link is required'),
 });
 
 const GetQuote = () => {
   const fileInputRef = useRef();
+
+  const handleEmailJSSend = async (values, resetForm) => {
+    let emailData = {
+      to_name: 'GeoShamba Surveys',
+      from_name: values.name,
+      reply_to: values.email,
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      company: values.company,
+      service: values.service,
+      description: values.description,
+      document_link: values.document_link,
+    };
+    try {
+      await emailjs.send(
+        'service_v3ux6z4',
+        'template_y6140m7',
+        emailData,
+        'ZKEljwMTyZYH6olyq'
+      );
+      alert('Thank you for your quote request! We will review your project and get back to you within 24 hours.');
+      resetForm();
+    } catch (error) {
+      alert('Sorry, there was an error sending your quote request. Please try again later.');
+    }
+  };
 
   return (
     <Box>
@@ -105,13 +134,11 @@ const GetQuote = () => {
                   company: '',
                   service: '',
                   description: '',
-                  file: null,
+                  document_link: '',
                 }}
                 validationSchema={QuoteSchema}
                 onSubmit={(values, { resetForm }) => {
-                  alert('Thank you for your quote request! We will review your project and get back to you within 24 hours.');
-                  resetForm();
-                  if (fileInputRef.current) fileInputRef.current.value = '';
+                  handleEmailJSSend(values, resetForm);
                 }}
               >
                 {({ errors, touched, setFieldValue }) => (
@@ -229,44 +256,22 @@ const GetQuote = () => {
                         />
                       </Grid>
                       <Grid item xs={12}>
-                        <Box sx={{ 
-                          my: 2, 
-                          p: 3, 
-                          border: '2px dashed', 
-                          borderColor: 'grey.300', 
-                          borderRadius: 2,
-                          textAlign: 'center',
-                          backgroundColor: 'grey.50'
-                        }}>
-                          <input
-                            ref={fileInputRef}
-                            id="file"
-                            name="file"
-                            type="file"
-                            style={{ display: 'none' }}
-                            onChange={event => setFieldValue('file', event.currentTarget.files[0])}
-                          />
-                          <label htmlFor="file">
-                            <Button 
-                              variant="outlined" 
-                              component="span"
-                              startIcon={<FileIcon />}
-                              sx={{ mb: 2 }}
-                            >
-                              Upload Project Files
-                            </Button>
-                            <Box>
-                              <Typography variant="body2" color="text.secondary">
-                                {fileInputRef.current && fileInputRef.current.files && fileInputRef.current.files[0]
-                                  ? `Selected: ${fileInputRef.current.files[0].name}`
-                                  : 'No file selected (optional)'}
-                              </Typography>
-                              <Typography variant="caption" color="text.secondary">
-                                Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB)
-                              </Typography>
-                            </Box>
-                          </label>
-                        </Box>
+                        <Field
+                          as={TextField}
+                          name="document_link"
+                          label="Document Link (Google Drive, Dropbox, etc.)"
+                          fullWidth
+                          margin="normal"
+                          placeholder="Paste a shareable link to your project document"
+                          error={touched.document_link && Boolean(errors.document_link)}
+                          helperText={touched.document_link && errors.document_link}
+                          sx={{
+                            '& .MuiOutlinedInput-root': {
+                              borderRadius: 2,
+                            }
+                          }}
+                          required
+                        />
                       </Grid>
                       <Grid item xs={12}>
                         <Button

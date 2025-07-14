@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Typography,
@@ -8,16 +8,53 @@ import {
   Box,
   Paper,
 } from '@mui/material';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-
-const ContactSchema = Yup.object().shape({
-  name: Yup.string().required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
-  message: Yup.string().required('Required'),
-});
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    let emailData = {
+      title: formData.subject || 'Contact Form Submission',
+      to_name: 'GeoShamba Surveys',
+      from_name: formData.name,
+      reply_to: formData.email,
+      message: formData.message,
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+    };
+    console.log('Prepared emailData:', emailData);
+    try {
+      await emailjs.send(
+        'service_v3ux6z4',
+        'template_6u820ew',
+        emailData,
+        'ZKEljwMTyZYH6olyq'
+      );
+      alert('Thank you for contacting us! Your message has been sent.');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      alert('Sorry, there was an error sending your message. Please try again later.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Container maxWidth="md" sx={{ py: 8 }}>
       <Typography variant="h1" align="center" sx={{ mb: 3, fontWeight: 700 }}>
@@ -29,57 +66,58 @@ const Contact = () => {
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           <Paper elevation={3} sx={{ p: 4 }}>
-            <Formik
-              initialValues={{ name: '', email: '', message: '' }}
-              validationSchema={ContactSchema}
-              onSubmit={(values, { resetForm }) => {
-                alert('Thank you for contacting us!');
-                resetForm();
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <Field
-                    as={TextField}
-                    name="name"
-                    label="Name"
-                    fullWidth
-                    margin="normal"
-                    error={touched.name && Boolean(errors.name)}
-                    helperText={touched.name && errors.name}
-                  />
-                  <Field
-                    as={TextField}
-                    name="email"
-                    label="Email"
-                    fullWidth
-                    margin="normal"
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={touched.email && errors.email}
-                  />
-                  <Field
-                    as={TextField}
-                    name="message"
-                    label="Message"
-                    fullWidth
-                    margin="normal"
-                    multiline
-                    rows={4}
-                    error={touched.message && Boolean(errors.message)}
-                    helperText={touched.message && errors.message}
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    sx={{ mt: 2, px: 4 }}
-                  >
-                    Send Message
-                  </Button>
-                </Form>
-              )}
-            </Formik>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                name="name"
+                label="Name"
+                fullWidth
+                margin="normal"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                name="email"
+                label="Email"
+                fullWidth
+                margin="normal"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                type="email"
+              />
+              <TextField
+                name="subject"
+                label="Subject"
+                fullWidth
+                margin="normal"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                name="message"
+                label="Message"
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4}
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                size="large"
+                sx={{ mt: 2, px: 4 }}
+                fullWidth
+                disabled={submitting}
+              >
+                {submitting ? 'Sending...' : 'Send Message'}
+              </Button>
+            </form>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>

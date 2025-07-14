@@ -22,14 +22,6 @@ const Footer = () => {
       behavior: 'smooth',
     });
   };
-
-  const servicesLinks = [
-    { name: 'Land Survey', path: '/services' },
-    { name: 'Mapping', path: '/services' },
-    { name: 'Cartography', path: '/services' },
-    { name: 'Web Development', path: '/services' },
-    { name: 'Drone Mapping', path: '/services' },
-  ];
   
   const companyLinks = [
     { name: 'About Us', path: '/about' },
@@ -40,6 +32,7 @@ const Footer = () => {
 
   const partnerLogos = [
       { src: '/images/high.jpg', alt: 'Highlands Logo' },
+      { src: '/images/afri.jpg', alt: 'AfriMaps Logo' },
   ]
 
   return (
@@ -122,9 +115,14 @@ const Footer = () => {
           </Grid>
         </Grid>
         
-        <Box sx={{ borderTop: 1, borderColor: 'grey.800', mt: 6, pt: 3, textAlign: 'center' }}>
+        <Box sx={{ borderTop: 1, borderColor: 'grey.800', mt: 6, pt: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
           <Typography variant="body2" sx={{ color: 'grey.500' }}>
             © {new Date().getFullYear()} Geo-Shamba Surveys. All Rights Reserved.
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'grey.500', ml: 'auto' }}>
+            <Link href="https://construmgis.site" target="_blank" rel="noopener" color="inherit" underline="hover" sx={{ fontWeight: 500 }}>
+              Developed by Construm Geosystems
+            </Link>
           </Typography>
         </Box>
       </Container>
