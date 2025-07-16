@@ -66,9 +66,9 @@ const GetQuote = () => {
     try {
       await emailjs.send(
         'service_dnvs6at',
-        'template_hwd074p',
+        'template_hwdo74p',
         emailData,
-        'SBzCTODn0J3YU-df'
+        'SBzCTODnz0J3YU-df'
       );
       alert('Thank you for your quote request! We will review your project and get back to you within 24 hours.');
       resetForm();
