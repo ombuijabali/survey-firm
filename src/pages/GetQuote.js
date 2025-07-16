@@ -66,7 +66,7 @@ const GetQuote = () => {
     try {
       await emailjs.send(
         'service_dnvs6at',
-        'template_3cd5bnh',
+        'template_hwd074p',
         emailData,
         'SBzCTODn0J3YU-df'
       );
