@@ -29,7 +29,7 @@ const Contact = () => {
     setSubmitting(true);
     let emailData = {
       title: formData.subject || 'Contact Form Submission',
-      to_name: 'GeoShamba Surveys',
+      to_name: 'Geo Shamba Surveys',
       from_name: formData.name,
       reply_to: formData.email,
       message: formData.message,
@@ -40,10 +40,10 @@ const Contact = () => {
     console.log('Prepared emailData:', emailData);
     try {
       await emailjs.send(
-        'service_v3ux6z4',
-        'template_6u820ew',
+        'service_dnvs6at',
+        'template_3cd5bnh',
         emailData,
-        'ZKEljwMTyZYH6olyq'
+        'SBzCTODn0J3YU-df'
       );
       alert('Thank you for contacting us! Your message has been sent.');
       setFormData({ name: '', email: '', subject: '', message: '' });
