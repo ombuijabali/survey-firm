@@ -52,7 +52,7 @@ const GetQuote = () => {
 
   const handleEmailJSSend = async (values, resetForm) => {
     let emailData = {
-      to_name: 'GeoShamba Surveys',
+      to_name: 'Geo Shamba Surveys',
       from_name: values.name,
       reply_to: values.email,
       name: values.name,
@@ -65,10 +65,10 @@ const GetQuote = () => {
     };
     try {
       await emailjs.send(
-        'service_v3ux6z4',
-        'template_y6140m7',
+        'service_dnvs6at',
+        'template_3cd5bnh',
         emailData,
-        'ZKEljwMTyZYH6olyq'
+        'SBzCTODn0J3YU-df'
       );
       alert('Thank you for your quote request! We will review your project and get back to you within 24 hours.');
       resetForm();
