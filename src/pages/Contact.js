@@ -43,7 +43,7 @@ const Contact = () => {
         'service_dnvs6at',
         'template_3cd5bnh',
         emailData,
-        'SBzCTODn0J3YU-df'
+        'SBzCTODnz0J3YU-df'
       );
       alert('Thank you for contacting us! Your message has been sent.');
       setFormData({ name: '', email: '', subject: '', message: '' });
